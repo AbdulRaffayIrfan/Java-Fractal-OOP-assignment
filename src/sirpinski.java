@@ -58,11 +58,13 @@ public class sirpinski extends JPanel{
     private void sound(){
         try {
             URL soundFile = sirpinski.class.getResource("/sound.wav");
-            //File soundFile = new File("src/res/audio.wav").getAbsoluteFile();
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 
             Clip clip = AudioSystem.getClip();
             clip.open(audioIn);
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+
+            gainControl.setValue(-20.0f);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             //clip.start();
 
